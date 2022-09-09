@@ -9,8 +9,6 @@ public class Player : MonoBehaviour
     private int _maxHeal = 100;
     private int _heal = 100;    
     private int _minHeal = 0;
-    private int _damage = 10;
-    private int _treatment = 10;
 
     public event UnityAction<int, int> ChangedHealth;
 
@@ -20,21 +18,15 @@ public class Player : MonoBehaviour
         ChangedHealth?.Invoke(_heal, _maxHeal);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        if (_heal > _minHeal)
-        {
-            _heal -= _damage;
-            ChangedHealth?.Invoke(_heal, _maxHeal);
-        }
+        _heal = Mathf.Clamp(_heal- damage, _minHeal, _maxHeal);
+        ChangedHealth?.Invoke(_heal, _maxHeal);
     }
 
-    public void TakeTreatment()
+    public void TakeTreatment(int treatment)
     {
-        if (_heal < _maxHeal)
-        {
-            _heal += _treatment;
-            ChangedHealth?.Invoke(_heal, _maxHeal);
-        }
+        _heal = Mathf.Clamp(_heal + treatment, _minHeal, _maxHeal);
+        ChangedHealth?.Invoke(_heal, _maxHeal);
     }
 }

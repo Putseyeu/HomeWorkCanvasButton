@@ -6,11 +6,16 @@ using UnityEngine.UI;
 public class BarHealth : MonoBehaviour
 {
     [SerializeField] Slider _healhtBar;
-    [SerializeField] private Player _player; 
+    [SerializeField] private Player _player;
+
+    private void Update()
+    {
+        
+    }
 
     public void OnValueChanged(int value, int maxValue)
     {
-        _healhtBar.value = (float) value/ maxValue;
+        _healhtBar.value = (float)value / maxValue;
     }
 
     private void OnEnable()
